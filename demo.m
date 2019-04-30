@@ -1,6 +1,6 @@
 clc; clear all; close all;
 addpath('./utils/')
-% addpath('path/to/gptoolbox') (gptoolbox can be found in "https://github.com/alecjacobson/gptoolbox")
+% addpath('path/to/gptoolbox')
 
 % parameters
 numEig = 100; % number of eigenfunctions to preserve
