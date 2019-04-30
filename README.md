@@ -1,5 +1,5 @@
 # Spectral Coarsening
-This is the MATLAB implementation of "Spectral Coarsening of Geometric Operators" [Liu et al. 2019]. Theonly dependency is the gptoolbox ```https://github.com/alecjacobson/gptoolbox```.
+This is the MATLAB implementation of "Spectral Coarsening of Geometric Operators" [Liu et al. 2019]. The only dependency is the gptoolbox ```https://github.com/alecjacobson/gptoolbox```.
 
 ### bibtex
 ```
