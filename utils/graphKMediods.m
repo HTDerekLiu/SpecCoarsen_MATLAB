@@ -1,4 +1,4 @@
-function [clusterAssignIdx] = graphKMediods(SoC, seedsIdx, maxIter)
+function [clusterAssignIdx] = graphKMediods(SoC, seedsIdx, landmarks, maxIter)
 % GRAPHKMEDIODS performs k-mediods clustering given a strength of
 % connection matrix (see strengthOfConnections.m)
 % 
@@ -14,8 +14,12 @@ function [clusterAssignIdx] = graphKMediods(SoC, seedsIdx, maxIter)
 tStart = tic;
 
 if (nargin < 3)
+    landmarks = [];
+end
+if (nargin < 4)
     maxIter = 20;
 end
+
 clusterAssignIdx = zeros(size(SoC,1),1);
 [row, col, dij] = find(SoC);
 ijList = unique(sort([row, col],2),'rows');
@@ -26,7 +30,7 @@ for iter = 1:maxIter
     borderIdx = unique(borderIdx(:));
 
     [distFromBorder, ~] = matrixBellmanFord_fast(SoC, borderIdx, row, col, dij);
-    for ii = 1:length(seedsIdx)
+    for ii = (length(landmarks)+1):length(seedsIdx)
         cIdx = seedsIdx(ii);
         aggNodes = find(nearestCenter == cIdx);
         [~,newCIdx] = max(distFromBorder(aggNodes));
@@ -39,6 +43,7 @@ for iter = 1:maxIter
         clusterAssignIdx = nearestCenter;
     end
 end
+
 fprintf('graphKMediods iteration %d\n', iter)
 tEnd = toc(tStart);
 fprintf('graphKMediods %.4f sec\n', tEnd)
